@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="style-sheet" href="">
     <title>Document</title>
 </head>
+
 <body>
     <img src="#">
     <div class="main-div"></div>
     <script>
-    
+
         const main = document.querySelector('.main-div')
         const newBtn = document.createElement('button')
         newBtn.textContent = "Find new"
@@ -26,21 +29,21 @@
 
 
         const img = document.querySelector('img')
-        newBtn.addEventListener('click', () => {
-        fetch('https://api.giphy.com/v1/gifs/translate?api_key=CieOrl6ynSNLqrVDlWiV5QCuN19NL5bZ&s=dragonball', {mode: 'cors'})
-            .then((response) => {
-                return response.json()
-            })
-            .then ((response) => {
-                img.src = response.data.images.original.url;
-                console.log(response.data.images.original.url)
-            })
-            .catch(error => {
+        newBtn.addEventListener('click', () => getGif())
+
+        async function getGif() {
+            try {
+            const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=CieOrl6ynSNLqrVDlWiV5QCuN19NL5bZ&s=dragonball', { mode: 'cors' })
+            const gifData = await response.json()
+                img.src = gifData.data.images.original.url;
+                img.classList.add('giphy-img')
+            } catch(error) {
                 console.error('Error fetching GIF:', error)
-            })
-})
-            
+            }
+        }
+        getGif();
 
     </script>
 </body>
+
 </html>
