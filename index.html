@@ -15,18 +15,28 @@
         const newBtn = document.createElement('button')
         newBtn.textContent = "Find new"
         newBtn.addEventListener('click', (e) => console.log("clicked"))
+
+        const searchInput = document.createElement('input')
+        searchInput.type = 'text'
+        searchInput.id = 'search-input'
+        searchInput.placeholder = 'Search for GIFs'
+
         main.appendChild(newBtn)
+        main.appendChild(searchInput)
 
 
         const img = document.querySelector('img')
         newBtn.addEventListener('click', () => {
-        fetch('https://api.giphy.com/v1/gifs/translate?api_key=CieOrl6ynSNLqrVDlWiV5QCuN19NL5bZ&s=cats', {mode: 'cors'})
+        fetch('https://api.giphy.com/v1/gifs/translate?api_key=CieOrl6ynSNLqrVDlWiV5QCuN19NL5bZ&s=dragonball', {mode: 'cors'})
             .then((response) => {
                 return response.json()
             })
             .then ((response) => {
                 img.src = response.data.images.original.url;
                 console.log(response.data.images.original.url)
+            })
+            .catch(error => {
+                console.error('Error fetching GIF:', error)
             })
 })
             
