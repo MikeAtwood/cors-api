@@ -10,7 +10,16 @@
     <img src="#">
     <div class="main-div"></div>
     <script>
+    
+        const main = document.querySelector('.main-div')
+        const newBtn = document.createElement('button')
+        newBtn.textContent = "Find new"
+        newBtn.addEventListener('click', (e) => console.log("clicked"))
+        main.appendChild(newBtn)
+
+
         const img = document.querySelector('img')
+        newBtn.addEventListener('click', () => {
         fetch('https://api.giphy.com/v1/gifs/translate?api_key=CieOrl6ynSNLqrVDlWiV5QCuN19NL5bZ&s=cats', {mode: 'cors'})
             .then((response) => {
                 return response.json()
@@ -19,12 +28,8 @@
                 img.src = response.data.images.original.url;
                 console.log(response.data.images.original.url)
             })
-
-            const main = document.querySelector('.main-div')
-            const newBtn = document.createElement('button')
-            newBtn.textContent = "Find new"
-            newBtn.addEventListener('click', (e) => console.log("clicked"))
-            main.appendChild(newBtn)
+})
+            
 
     </script>
 </body>
